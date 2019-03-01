@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class MP_MovingPlatform : MonoBehaviour {
 
-    [SerializeField]
-    GameObject pChar;
-    BoxCollider trigZone;
-    RaycastHit hit;
+    	//set a variable for player
+    	GameObject pChar;
+	//make a variable for the collider
+    	BoxCollider trigZone;
+	//setup the raycast
+    	RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
-        pChar = GameObject.FindWithTag("Player");
+		//assign a alue ot the player using the tag Player
+        	pChar = GameObject.FindWithTag("Player");
         
-       trigZone = gameObject.AddComponent<BoxCollider>();
-        trigZone.isTrigger = true;
-        trigZone.size = new Vector3(1,1.6f,1);
+		//makes a new collider on the moving platform
+       		trigZone = gameObject.AddComponent<BoxCollider>();
+		//sets the collider to trigger
+        	trigZone.isTrigger = true;
+		//sets the size of the platforms new collider
+        	trigZone.size = new Vector3(1,1.6f,1);
 	}
 	
+	//don't worry about this old code
 	// Update is called once per frame
 	void Update () {
 		/*if(Physics.Raycast(pChar.transform.position,pChar.transform.up *-1, out hit, 5) && hit.transform.gameObject == gameObject)
@@ -36,22 +43,27 @@ public class MP_MovingPlatform : MonoBehaviour {
         */
 	}
 
+	//if the player enters the trigger collider
    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+		//tell console you entered then set the player's parent to this object
             Debug.Log("enter");
             pChar.transform.parent = transform;
         }
     }
+	//if the player exits the trigger collider
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player")
         {
+		//tell the console you exited and remove the player's parent
             Debug.Log("exit");
             pChar.transform.parent = null;
         }
     }
+	//ignore this old code
     /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == GameObject.FindWithTag("Player"))
