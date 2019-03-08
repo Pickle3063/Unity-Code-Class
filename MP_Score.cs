@@ -33,6 +33,8 @@ public class MP_Score : MonoBehaviour {
             {
 		    //find the death zone and tell it to restart the scene
                 FindObjectOfType<MP_DeathZone>().RestartScene();
+		     //use this line instead if using checkpoints
+                //FindObjectOfType<MP_CheckDeathZone>().RestartScene();
             }
         }
     }
@@ -75,7 +77,11 @@ public class MP_Score : MonoBehaviour {
             won = true;
         }
     }
-
+ //lets other scripts check if the boolean is true or false
+    public bool GetWon()
+    {
+        return won;
+    }
 	//this is called whenever you want to update the score text
     void UpdatePoints()
     {
